@@ -109,6 +109,7 @@
     gap: 10px;
 
     margin: 15px;
+
 }
 .mainPContainer{
     top: 95px;
@@ -119,5 +120,9 @@
     text-align: center;
 
 
+
+}
+.notgoingCon{
+    width: 80%;
 
 }

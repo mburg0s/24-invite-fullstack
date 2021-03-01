@@ -1,29 +1,32 @@
 import React, {useState, useEffect} from "react";
 
 import People from "./People";
-import {  useSelector } from "react-redux";
+import {  useSelector, useDispatch } from "react-redux";
 import {
-  showGoing,
+  getGoing,
+  selectGoing,
 } from "./inviteSlice";
 import axios from 'axios'
 
 
 export default function GoingPage() {
-//   const person = useSelector(showGoing);
+  const person = useSelector(selectGoing);
+  const dispatch = useDispatch()
 
-  const [person, setApprove] = useState([])
+
+  // const [person, setApprove] = useState([])
   console.log(person, "not");
 
 
   useEffect(() => {
-      axios.get("/going")
-      .then(resp => {
-        console.log(resp.data, 'approve')
-        setApprove(resp.data)
-        // const person = approve
-      })
+      // axios.get("/going")
+      // .then(resp => {
+      //   console.log(resp.data, 'approve')
+      //   setApprove(resp.data)
+      //   // const person = approve
+      // })
     
-    // dispatch(showNotGoing())
+    dispatch(getGoing())
   }, []);
 
   return (
@@ -36,8 +39,8 @@ export default function GoingPage() {
           {/* <li> */}
           {/* <p>{p.first}</p> */}
           {/* </li> */}
-          {/* {person.map(person => <People person={person} />)} */}
-          <People person={person} />
+          {person.map(person => <People person={person.person} />)}
+          {/* <People person={person} /> */}
         </div>
       </div>
     </div>

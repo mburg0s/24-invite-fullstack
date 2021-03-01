@@ -34,7 +34,7 @@ export default function InviteDetail({person}) {
 
         </Link>
         <Link to={`/not-going`} className = "btnNotGoing">  
-            <p>Not Going: {notgoing}</p>
+            <p>Not Going: {notgoing} </p>
 
         </Link>    
       </div>

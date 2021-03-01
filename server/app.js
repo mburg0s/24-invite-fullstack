@@ -5,7 +5,7 @@ const axios = require('axios')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 let notGoing = []
-// let going = []
+let going = []
 // const user ={
 //     "first": "Oya",
 //     "last": "Nalbantoğlu",
@@ -34,9 +34,8 @@ app.get('/invite', (req, res) => {
 })
 
 app.get('/going', (req, res)=> {
-    res.json(req.query)
-    // res.json(going)
-    // console.log(going, 'going')
+    res.json(going)
+    console.log(going, 'going')
 
 
     // res.json(person)
@@ -58,7 +57,8 @@ app.get('/notgoing', (req, res)=> {
 
 app.post('/mark-invitee', (req, res)=>{
     const person = req.body
-    notGoing.push(person)
+    person.isGoing ? going.push(person) : notGoing.push(person)
+    // notGoing.push(person)
     console.log(person,'mark')
 
     // users.push({...person},)

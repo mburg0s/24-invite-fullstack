@@ -16,20 +16,11 @@ export const inviteSlice = createSlice({
   },
   reducers: {
     approveInvitee: (state) => {
-      // const inviteeToBeAdded = {...action.payload};
-      // state.inviteGoing.push(inviteeToBeAdded) 
       
       state.going++
-      // console.log(inviteeToBeAdded , state.going)
 
     },
     rejectInvitee: (state) => {
-      // axios.post('/mark-invitee',{action: action.payload,isGoing:false})
-      // .then (resp =>{
-      //   dispatch(setInvite(resp.data))
-    // })
-      // const inviteeToBeAdded = {...action.payload, isGoing: false};
-      // state.inviteNotgoing.push(inviteeToBeAdded) 
       state.notgoing++
       // console.log(inviteeToBeAdded , state.notgoing, 'notgoing')
       // state. = action.payload
@@ -40,9 +31,9 @@ export const inviteSlice = createSlice({
       state.invite = action.payload
     },
 
-    setApprove: (state, action) => {
-      state.inviteNotgoing = action.payload
-    },
+    // setApprove: (state, action) => {
+    //   state.inviteNotgoing = action.payload
+    // },
 
     showNotGoing: (state,action) => {
 
@@ -82,7 +73,10 @@ export const getRejectInvite = () => dispatch => {
   axios.get('/notgoing')
   .then(resp => {
     console.log(resp.data, 'reject')
-    dispatch(setApprove(resp.data))
+    // dispatch(setApprove(resp.data))
+    dispatch(showNotGoing(resp.data))
+
+
   })
 
 }
@@ -91,6 +85,9 @@ export const addNotGoing = (p) => dispatch => {
   axios.post('/mark-invitee',{...p, isGoing:false} )
   .then (resp =>{
     console.log(resp, 'addNotGoing')
+    // dispatch(setInvite()
+
+    // dispatch(showNotGoing(resp.data))
 })
 // dispatch(setInvite())
 
@@ -101,18 +98,20 @@ export const addGoing = (p) => dispatch => {
   // console.log()
   .then (resp =>{
     console.log(resp, 'addGoing')
+    // dispatch(showGoing(resp.data))
+
 })
 
 }
 
 
-export const getApproveInvite = () => (dispatch) => {
-  axios.get("/notgoing").then((resp) => {
-    console.log(resp.data);
-    dispatch(showNotGoing(resp.data));
-  });
+// export const getApproveInvite = () => (dispatch) => {
+//   axios.get("/going").then((resp) => {
+//     console.log(resp.data);
+//     dispatch(showGoing(resp.data));
+//   });
   
-};
+// };
 
 export const getGoing = () => (dispatch) => {
   axios.get("/going").then((resp) => {
