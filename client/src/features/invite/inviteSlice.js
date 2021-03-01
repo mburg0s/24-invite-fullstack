@@ -1,42 +1,145 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios'
+// import { useSelector, useDispatch } from "react-redux";
+
+
 
 export const inviteSlice = createSlice({
   name: 'invite',
   initialState: {
-    value: 0,
+    going: 0,
+    notgoing: 0,
+    // inviteGoing: [],
+    inviteNotgoing: [],
+    inviteGoing:[],
+    invite: {},
   },
   reducers: {
-    increment: state => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    approveInvitee: (state) => {
+      // const inviteeToBeAdded = {...action.payload};
+      // state.inviteGoing.push(inviteeToBeAdded) 
+      
+      state.going++
+      // console.log(inviteeToBeAdded , state.going)
+
     },
-    decrement: state => {
-      state.value -= 1;
+    rejectInvitee: (state) => {
+      // axios.post('/mark-invitee',{action: action.payload,isGoing:false})
+      // .then (resp =>{
+      //   dispatch(setInvite(resp.data))
+    // })
+      // const inviteeToBeAdded = {...action.payload, isGoing: false};
+      // state.inviteNotgoing.push(inviteeToBeAdded) 
+      state.notgoing++
+      // console.log(inviteeToBeAdded , state.notgoing, 'notgoing')
+      // state. = action.payload
+
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    setInvite: (state, action) => {
+
+      state.invite = action.payload
     },
+
+    setApprove: (state, action) => {
+      state.inviteNotgoing = action.payload
+    },
+
+    showNotGoing: (state,action) => {
+
+      state.inviteNotgoing = action.payload
+    },
+    showGoing: (state,action) => {
+
+      state.inviteGoing = action.payload
+    }
   },
 });
 
-export const { increment, decrement, incrementByAmount } = inviteSlice.actions;
+export const { rejectInvitee, acceptInvitee, setInvite,showNotGoing,saveInvite, approveInvitee, showGoing, setApprove} = inviteSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
-export const incrementAsync = amount => dispatch => {
-  setTimeout(() => {
-    dispatch(incrementByAmount(amount));
-  }, 1000);
+// export const incrementAsync = amount => dispatch => {
+//   setTimeout(() => {
+//     dispatch(incrementByAmount(amount));
+//   }, 1000);
+// };
+
+
+export const getInvite = () => dispatch => {
+
+  axios.get('/invite')
+  .then(resp => {
+      console.log(resp.data, 'data')
+      dispatch(setInvite(resp.data))
+      // dispatch()
+  })
+}
+
+export const getRejectInvite = () => dispatch => {
+  axios.get('/notgoing')
+  .then(resp => {
+    console.log(resp.data, 'reject')
+    dispatch(setApprove(resp.data))
+  })
+
+}
+
+export const addNotGoing = (p) => dispatch => {
+  axios.post('/mark-invitee',{...p, isGoing:false} )
+  .then (resp =>{
+    console.log(resp, 'addNotGoing')
+})
+// dispatch(setInvite())
+
+}
+
+export const addGoing = (p) => dispatch => {
+  axios.post('/mark-invitee',{...p, isGoing:true} )
+  // console.log()
+  .then (resp =>{
+    console.log(resp, 'addGoing')
+})
+
+}
+
+
+export const getApproveInvite = () => (dispatch) => {
+  axios.get("/notgoing").then((resp) => {
+    console.log(resp.data);
+    dispatch(showNotGoing(resp.data));
+  });
+  
 };
+
+export const getGoing = () => (dispatch) => {
+  axios.get("/going").then((resp) => {
+    console.log(resp.data);
+    dispatch(showGoing(resp.data));
+  });
+  
+};
+
+
+// app.post('/users', (req, res)=>{
+//   const user = req.body
+//   users.push({...user, id: users.length + 1})
+//   res.json(user)
+//   console.log(user, 'name')
+
+// })
+
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.invite.value)`
-export const selectCount = state => state.invite.value;
+export const countGoing = state => state.invite.going;
+export const countNotGoing = state => state.invite.notgoing;
+export const selectNotGoing = state => state.invite.inviteNotgoing;
+export const selectGoing = state => state.invite.inviteGoing;
+
+export const selectInvite = state => state.invite.invite;
 
 export default inviteSlice.reducer;
