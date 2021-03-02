@@ -22,6 +22,7 @@ app.get('/invite', (req, res) => {
     .then(resp =>{
         person = resp.data.results[0]
             console.log(person)
+            
 
         res.json({
             first: person.name.first,
@@ -38,42 +39,23 @@ app.get('/going', (req, res)=> {
     console.log(going, 'going')
 
 
-    // res.json(person)
 })
 
 app.get('/notgoing', (req, res)=> {
-            // res.json(res.data)
-
-            // res.json(resp)
             res.json(notGoing)
             console.log(notGoing, 'notgoing1')
 
 })
 
-// app.get('/mark-invitee', (req, res) => {
-//     res.json(req.query)
-
-// })
 
 app.post('/mark-invitee', (req, res)=>{
     const person = req.body
     person.isGoing ? going.push(person) : notGoing.push(person)
-    // notGoing.push(person)
     console.log(person,'mark')
 
-    // users.push({...person},)
-    // res.json(mark-invitee)
-    // console.log(mark-invitee, 'invite')
 
 })
 
-// app.post('/users', (req, res)=>{
-//     const user = req.body
-//     users.push({...user, id: users.length + 1})
-//     res.json(user)
-//     console.log(user, 'name')
-
-// })
 
 
 

@@ -7,10 +7,10 @@
 .inviteMainContainer{
     height: 400px;
     width: 350px;
-    border: 1px solid rgb(204, 203, 203);
+    /* border: 1px solid rgb(204, 203, 203); */
     margin: 0 auto;
     margin-top: 100px;
-    background-color: rgb(248, 246, 246);
+    /* background-color: rgb(248, 246, 246); */
     text-align: center;
 
 
@@ -23,6 +23,8 @@
     padding-top: 50px;
     padding-bottom: 50px;
     border-bottom: 1px solid rgb(204, 203, 203);
+    width: 350px;
+    margin-left: -25px;
     /* align-items: center; */
 }
 .inviteInfo {
@@ -30,7 +32,7 @@
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgb(204, 203, 203);
+    /* border-bottom: 1px solid rgb(204, 203, 203); */
 }
 .inviteSpan {
     padding: 7px;
@@ -56,12 +58,15 @@
     outline: none;
 }
 .inviteButton {
-    padding-top: 5px;
+    /* padding-top: 5px; */
     padding-right: 60px;
     padding-left: 60px;
     padding-top: 5px;
     display: flex;
     justify-content: space-between;
+    height: 50px;
+    border: 1px solid rgb(204, 203, 203);
+    background-color: rgb(248, 246, 246);
     
 
 }
@@ -118,11 +123,8 @@
     border: 1px solid rgb(204, 203, 203);
     background-color: rgb(248, 246, 246);
     text-align: center;
-
-
-
-}
-.notgoingCon{
-    width: 80%;
+    margin-right: 10px;
+    
+    width: 350px;
 
 }

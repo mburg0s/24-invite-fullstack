@@ -8,11 +8,12 @@ import {Link} from "react-router-dom";
 import People from "./People";
 
 export default function InviteDetail({person}) {
+  // console.log(person.user, 'a')
   const dispatch = useDispatch()  
-  const going = useSelector(countGoing);
-  const notgoing = useSelector(countNotGoing);
-// const going = useSelector(selectGoing);
-// const notgoing = useSelector(selectNotGoing);
+  // const going = useSelector(countGoing);
+  // const notgoing = useSelector(countNotGoing);
+const going = useSelector(selectGoing);
+const notgoing = useSelector(selectNotGoing);
 
 
   function reject() {
@@ -23,23 +24,26 @@ export default function InviteDetail({person}) {
   function approve(){
     dispatch(approveInvitee())
     dispatch(addGoing({person}))
+    // dispatch(rejectInvitee())
   
   }
 
   return (
-    <div>
+    <div className="inviteMain">
       <div className="inviteCounter">
         <Link to={`/going`} className = "btnGoing"> 
-            <p>Going: {going} </p>
+            <p>Going: {going.length} </p>
 
         </Link>
         <Link to={`/not-going`} className = "btnNotGoing">  
-            <p>Not Going: {notgoing} </p>
+            <p>Not Going: {notgoing.length} </p>
 
         </Link>    
       </div>
       <div className="inviteMainContainer">
           <People  person = {person} /> 
+          {/* {person.map(person => <People person={person} />)} */}
+
         {/* <div className="invitePicContainer">
           <img src={person.picture} alt={person.first} className="invitePic" />
         </div>
