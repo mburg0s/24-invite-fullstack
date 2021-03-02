@@ -7,7 +7,8 @@ export default function People({person}) {
   return (
     <div className="mainPContainer">
         
-      <div className="invitePicContainer">
+      {/* <div className="invitePicContainer" style={{ backgroundImage: `url(${item.img.thumb})` }}> */}
+      <div className="invitePicContainer">  
         <img src={person.picture} alt={person.first} className="invitePic" />
       </div>
       <div className="inviteInfo">

@@ -29,7 +29,9 @@ app.get('/invite', (req, res) => {
             last: person.name.last,
             phone: person.phone,
             email: person.email,
-            picture: person.picture.large
+            picture: person.picture.large,
+            countGoing: going.length,
+            countNotGoing: notGoing.length
         })
     })
 })

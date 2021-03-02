@@ -22,7 +22,7 @@ export default function GoingPage() {
   }, []);
 
   return (
-    <div>
+    <div className="notgoingCon">
       <h1>Going </h1>
       <div className="peopleMainDiv">
         <div className="peopleDiv">

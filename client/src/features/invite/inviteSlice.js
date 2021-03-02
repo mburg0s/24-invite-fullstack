@@ -5,20 +5,12 @@ import axios from 'axios'
 export const inviteSlice = createSlice({
   name: 'invite',
   initialState: {
-    going: 0,
-    notgoing: 0,
     inviteNotgoing: [],
     inviteGoing:[],
     invite: {},
   },
   reducers: {
-    approveInvitee: (state) => {
-      state.going++
 
-    },
-    rejectInvitee: (state) => {
-      state.notgoing++
-    },
     setInvite: (state, action) => {
 
       state.invite = action.payload
@@ -36,30 +28,20 @@ export const inviteSlice = createSlice({
   }
 });
 
-export const { rejectInvitee, acceptInvitee, setInvite,showNotGoing,saveInvite, approveInvitee, showGoing, setApprove} = inviteSlice.actions;
+export const { setInvite,showNotGoing,showGoing} = inviteSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
 
-// export const  getRandomUser= ()=> dispatch =>{
-//   axios.get('/invite')
-//   .then(resp => {
-//     console.log(resp.data, 'data')
-//     dispatch(setInvite(resp.data))
-// })
 
-
-// }
 
 
 export const getInvite = () => dispatch => {
 
-  // getRandomUser()  
   axios.get('/invite')
   .then(resp => {
-      const {user, goingCount, notGoingCount} = resp.data
       console.log(resp.data, 'data')
       dispatch(setInvite(resp.data))
   })
@@ -119,8 +101,6 @@ export const getGoing = () => (dispatch) => {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.invite.value)`
-export const countGoing = state => state.invite.going;
-export const countNotGoing = state => state.invite.notgoing;
 export const selectNotGoing = state => state.invite.inviteNotgoing;
 export const selectGoing = state => state.invite.inviteGoing;
 export const selectInvite = state => state.invite.invite;
